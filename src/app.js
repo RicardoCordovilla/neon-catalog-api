@@ -8,10 +8,14 @@ const db = require('./utils/database')
 const express = require('express')
 const app = express()
 app.use(express.json())
-const corsOption = {
+const corsOptions = {
     // credentials: true,
     origin: '*'
 }
+cors(corsOptions)
+
+
+
 
 db.authenticate()
     .then(() => { console.log('DB authenticated') })
