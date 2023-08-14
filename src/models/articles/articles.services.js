@@ -34,7 +34,8 @@ const createArticle = (req, res) => {
 
 const updateArticle = (req, res) => {
     const { title, description, stock, rent, active, urlsImages, options, tags } = req.body
-    articlesControllers.updateArticle({ title, description, stock, rent, active, urlsImages, options, tags })
+    id = req.params.id
+    articlesControllers.updateArticle(id, { title, description, stock, rent, active, urlsImages, options, tags })
         .then(data => {
             res.status(200).json(data)
         })
