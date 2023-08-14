@@ -2,7 +2,7 @@ const uuid = require('uuid')
 const Articles = require('./articles.model')
 
 const getAllArticles = async () => {
-    const data = await Articles.findAll({ order: ['updatedAt', 'DESC'] })
+    const data = await Articles.findAll({ order: [['updatedAt', 'DESC']] })
     return data
 }
 
