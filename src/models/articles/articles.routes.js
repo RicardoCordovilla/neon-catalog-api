@@ -11,7 +11,7 @@ router.post('/',
     articlesServices.createArticle
 )
 router.patch('/:id',
-    passport.authenticate('jwt', { session: false }),
+    // passport.authenticate('jwt', { session: false }),
     articlesServices.updateArticle
 )
 
