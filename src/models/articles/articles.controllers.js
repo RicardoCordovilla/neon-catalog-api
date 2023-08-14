@@ -8,7 +8,7 @@ const getAllArticles = async () => {
 
 const getArticleById = async (id) => {
     const data = await Articles.findOne(
-        { where: { id } }
+        { where: { id }, order: ['updatedAt', 'DESC'] }
     )
     return data
 }

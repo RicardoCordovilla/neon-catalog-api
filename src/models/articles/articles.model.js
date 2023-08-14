@@ -45,6 +45,6 @@ const Articles = db.define('articles', {
     },
 
 
-}, { timestamps: false })
+})
 
 module.exports = Articles
