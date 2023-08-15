@@ -41,7 +41,7 @@ const updateArticle = async (id, body) => {
 }
 
 const updateRaiting = async (id) => {
-    const result = await Articles.sum('raiting', {
+    const result = await Articles.increment({ raiting: 1 }, {
         where: { id }
     })
     return result

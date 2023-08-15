@@ -11,12 +11,12 @@ router.post('/',
     // passport.authenticate('jwt', { session: false }),
     articlesServices.createArticle
 )
-router.patch('id/:id',
+router.patch('/id/:id',
     // passport.authenticate('jwt', { session: false }),
     articlesServices.updateArticle
 )
 
-router.patch('raiting/:id',
+router.patch('/raiting/:id',
     // passport.authenticate('jwt', { session: false }),
     articlesServices.updateRaiting
 )
