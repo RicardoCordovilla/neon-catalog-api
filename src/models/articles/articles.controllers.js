@@ -6,6 +6,11 @@ const getAllArticles = async () => {
     return data
 }
 
+const getAllByRaiting = async () => {
+    const data = await Articles.findAll({ order: [['raiting', 'DESC']] })
+    return data
+}
+
 const getArticleById = async (id) => {
     const data = await Articles.findOne(
         { where: { id } }
@@ -35,10 +40,18 @@ const updateArticle = async (id, body) => {
     return result
 }
 
+const updateRaiting = async (id) => {
+    const result = await Articles.sum('raiting', {
+        where: { id }
+    })
+    return result
+}
 module.exports = {
     getAllArticles,
+    getAllByRaiting,
     getArticleById,
     createArticle,
-    updateArticle
+    updateArticle,
+    updateRaiting
 }
 

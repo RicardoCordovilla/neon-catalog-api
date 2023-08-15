@@ -43,7 +43,11 @@ const Articles = db.define('articles', {
         allowNull: true,
         defaultValue: ['Decoracion']
     },
-
+    raiting: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        defaultValue: 0
+    }
 
 })
 

@@ -10,6 +10,16 @@ const getAllArticles = (req, res) => {
         })
 }
 
+const getAllByRaiting = (req, res) => {
+    articlesControllers.getAllByRaiting()
+        .then((response) => {
+            res.status(200).json(response)
+        })
+        .catch((err) => {
+            res.status(404).json({ message: err.message })
+        })
+}
+
 const getArticleById = (req, res) => {
     const id = req.params.id
     articlesControllers.getArticleById(id)
@@ -44,9 +54,22 @@ const updateArticle = (req, res) => {
         })
 }
 
+const updateRaiting = (req, res) => {
+    // const { raiting } = req.body
+    id = req.params.id
+    articlesControllers.updateRaiting(id)
+        .then(data => {
+            res.status(200).json(data)
+        })
+        .catch((err) => {
+            res.status(404).json({ message: err.message })
+        })
+}
 module.exports = {
     getAllArticles,
+    getAllByRaiting,
     getArticleById,
     createArticle,
-    updateArticle
+    updateArticle,
+    updateRaiting
 }

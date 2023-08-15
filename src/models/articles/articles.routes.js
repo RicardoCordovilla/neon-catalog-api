@@ -3,8 +3,9 @@ const passport = require('passport')
 require('../../middlewares/auth.middleware')(passport)
 const articlesServices = require('./articles.services')
 
+router.get('/raiting', articlesServices.getAllByRaiting)
 router.get('/', articlesServices.getAllArticles)
-router.get('/:id', articlesServices.getArticleById)
+router.get('/id/:id', articlesServices.getArticleById)
 
 router.post('/',
     // passport.authenticate('jwt', { session: false }),
@@ -13,6 +14,11 @@ router.post('/',
 router.patch('/:id',
     // passport.authenticate('jwt', { session: false }),
     articlesServices.updateArticle
+)
+
+router.patch('raiting/:id',
+    // passport.authenticate('jwt', { session: false }),
+    articlesServices.updateRaiting
 )
 
 
