@@ -4,6 +4,7 @@ require('../../middlewares/auth.middleware')(passport)
 const articlesServices = require('./articles.services')
 
 router.get('/raiting', articlesServices.getAllByRaiting)
+router.get('/rate/paginated', articlesServices.getAllRatePaginated)
 router.get('/', articlesServices.getAllArticles)
 router.get('/id/:id', articlesServices.getArticleById)
 

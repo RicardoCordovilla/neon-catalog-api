@@ -20,6 +20,22 @@ const getAllByRaiting = (req, res) => {
         })
 }
 
+const getAllRatePaginated = (req, res) => {
+    const { page, pageSize } = req.query
+    articlesControllers.getAllRatePaginated(page, pageSize)
+        .then((response) => {
+            res.status(200).json({
+                results: response.rows,
+                totalPages: Math.ceil(response.count / pageSize),
+                hasMore: response.rows.length >  pageSize,
+            })
+        })
+        .catch((err) => {
+            res.status(404).json({ message: err.message })
+        })
+}
+
+
 const getArticleById = (req, res) => {
     const id = req.params.id
     articlesControllers.getArticleById(id)
@@ -68,6 +84,7 @@ const updateRaiting = (req, res) => {
 module.exports = {
     getAllArticles,
     getAllByRaiting,
+    getAllRatePaginated,
     getArticleById,
     createArticle,
     updateArticle,

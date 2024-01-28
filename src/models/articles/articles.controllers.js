@@ -7,7 +7,22 @@ const getAllArticles = async () => {
 }
 
 const getAllByRaiting = async () => {
-    const data = await Articles.findAll({ order: [['raiting', 'DESC']] })
+    const data = await Articles.findAll({ order: [['updatedAt', 'DESC']] })
+    return data
+}
+
+const getAllRatePaginated = async (page, pageSize=5) => {
+    const offset = page * pageSize;
+    const limit = pageSize;
+
+    const data = await Articles.findAndCountAll({
+        order: [['raiting', 'DESC']],
+        offset,
+        limit,
+        attributes: ['id', 'title', 'urlsImages']
+    })
+    
+
     return data
 }
 
@@ -49,6 +64,7 @@ const updateRaiting = async (id) => {
 module.exports = {
     getAllArticles,
     getAllByRaiting,
+    getAllRatePaginated,
     getArticleById,
     createArticle,
     updateArticle,
