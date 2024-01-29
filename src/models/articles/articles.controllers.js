@@ -19,7 +19,7 @@ const getAllRatePaginated = async (page, pageSize=5) => {
         order: [['raiting', 'DESC']],
         offset,
         limit,
-        attributes: ['id', 'title', 'urlsImages']
+        attributes: ['id', 'title', 'urlsImages','raiting','options']
     })
     
 
