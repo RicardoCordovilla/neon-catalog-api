@@ -25,9 +25,11 @@ const getAllRatePaginated = (req, res) => {
     articlesControllers.getAllRatePaginated(page, pageSize)
         .then((response) => {
             res.status(200).json({
-                results: response.rows,
+                results: response,
                 totalPages: Math.ceil(response.count / pageSize),
-                hasMore: response.rows.length >  pageSize,
+                rows:response.rows.length,
+                pageSize: pageSize,
+                hasMore: response.rows.length >=  pageSize,
             })
         })
         .catch((err) => {
