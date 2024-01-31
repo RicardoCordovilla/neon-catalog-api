@@ -1,5 +1,6 @@
 const uuid = require('uuid')
 const Articles = require('./articles.model')
+const { Op, Sequelize } = require('sequelize')
 
 const getAllArticles = async () => {
     const data = await Articles.findAll({ order: [['updatedAt', 'DESC']] })
@@ -11,7 +12,7 @@ const getAllByRaiting = async () => {
     return data
 }
 
-const getAllRatePaginated = async (page, pageSize=5) => {
+const getAllRatePaginated = async (page, pageSize = 5) => {
     const offset = page * pageSize;
     const limit = pageSize;
 
@@ -19,9 +20,9 @@ const getAllRatePaginated = async (page, pageSize=5) => {
         order: [['raiting', 'DESC']],
         offset,
         limit,
-        attributes: ['id', 'title', 'urlsImages','raiting','options']
+        attributes: ['id', 'title', 'urlsImages', 'raiting', 'options']
     })
-    
+
 
     return data
 }
@@ -61,6 +62,29 @@ const updateRaiting = async (id) => {
     })
     return result
 }
+
+const searchArticles = async (search, page, pageSize) => {
+    const offset = page * pageSize;
+    const limit = pageSize;
+
+    const data = await Articles.findAndCountAll({
+        where: {
+            [Op.or]: [
+                { title: { [Op.iLike]: `%${search}%` } },
+                { description: { [Op.iLike]: `%${search}%` } },
+                // { tags: { [Op.overlap]: ['decora'] } }
+                // { options: { [Op.contains]: { keywords: 'price' } } }
+            ]
+        },
+        offset,
+        limit,
+        // attributes: ['id', 'title', 'urlsImages']
+        attributes: ['title', 'tags', 'description']
+    })
+    return data
+
+}
+
 module.exports = {
     getAllArticles,
     getAllByRaiting,
@@ -68,6 +92,7 @@ module.exports = {
     getArticleById,
     createArticle,
     updateArticle,
-    updateRaiting
+    updateRaiting,
+    searchArticles
 }
 
