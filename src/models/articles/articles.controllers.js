@@ -27,6 +27,29 @@ const getAllRatePaginated = async (page, pageSize = 5) => {
     return data
 }
 
+const searchArticles = async (search, page, pageSize) => {
+    const offset = page * pageSize;
+    const limit = pageSize;
+
+    const data = await Articles.findAndCountAll({
+        where: {
+            [Op.or]: [
+                { title: { [Op.iLike]: `%${search}%` } },
+                { description: { [Op.iLike]: `%${search}%` } },
+                // { tags: { [Op.overlap]: ['decora'] } }
+                // { options: { [Op.contains]: { keywords: 'price' } } }
+            ]
+        },
+        offset,
+        limit,
+        // attributes: ['id', 'title', 'urlsImages']
+        attributes: ['id', 'title', 'urlsImages', 'raiting', 'options']
+    })
+    return data
+
+}
+
+
 const getArticleById = async (id) => {
     const data = await Articles.findOne(
         { where: { id } }
@@ -63,27 +86,7 @@ const updateRaiting = async (id) => {
     return result
 }
 
-const searchArticles = async (search, page, pageSize) => {
-    const offset = page * pageSize;
-    const limit = pageSize;
 
-    const data = await Articles.findAndCountAll({
-        where: {
-            [Op.or]: [
-                { title: { [Op.iLike]: `%${search}%` } },
-                { description: { [Op.iLike]: `%${search}%` } },
-                // { tags: { [Op.overlap]: ['decora'] } }
-                // { options: { [Op.contains]: { keywords: 'price' } } }
-            ]
-        },
-        offset,
-        limit,
-        // attributes: ['id', 'title', 'urlsImages']
-        attributes: ['title', 'tags', 'description']
-    })
-    return data
-
-}
 
 module.exports = {
     getAllArticles,
