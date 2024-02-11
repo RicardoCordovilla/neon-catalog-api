@@ -1,12 +1,15 @@
 const router = require('express').Router()
+const apicache = require('apicache');
 const passport = require('passport')
 require('../../middlewares/auth.middleware')(passport)
 const articlesServices = require('./articles.services')
 
-router.get('/raiting', articlesServices.getAllByRaiting)
-router.get('/rate/paginated', articlesServices.getAllRatePaginated)
-router.get('/search', articlesServices.searchArticles)
-router.get('/', articlesServices.getAllArticles)
+let cache = apicache.middleware;
+
+router.get('/raiting', cache('7 days'),articlesServices.getAllByRaiting)
+router.get('/rate/paginated', cache('7 days'),articlesServices.getAllRatePaginated)
+router.get('/search',cache('7 days'), articlesServices.searchArticles)
+router.get('/', cache('7 days'),articlesServices.getAllArticles)
 router.get('/id/:id', articlesServices.getArticleById)
 
 router.post('/',
