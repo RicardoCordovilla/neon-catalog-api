@@ -6,11 +6,21 @@ const articlesServices = require('./articles.services')
 
 let cache = apicache.middleware;
 
-router.get('/raiting', cache('7 days'),articlesServices.getAllByRaiting)
-router.get('/rate/paginated', cache('7 days'),articlesServices.getAllRatePaginated)
-router.get('/search',cache('7 days'), articlesServices.searchArticles)
-router.get('/', cache('7 days'),articlesServices.getAllArticles)
-router.get('/id/:id',cache('7 days'), articlesServices.getArticleById)
+router.get('/raiting',
+    // cache('7 days'), 
+    articlesServices.getAllByRaiting)
+router.get('/rate/paginated',
+    // cache('7 days'),
+    articlesServices.getAllRatePaginated)
+router.get('/search',
+    // cache('7 days'),
+    articlesServices.searchArticles)
+router.get('/',
+    // cache('7 days'),
+    articlesServices.getAllArticles)
+router.get('/id/:id',
+    // cache('7 days'),
+    articlesServices.getArticleById)
 
 router.post('/',
     // passport.authenticate('jwt', { session: false }),
