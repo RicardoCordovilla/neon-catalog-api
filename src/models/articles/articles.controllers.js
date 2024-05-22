@@ -22,8 +22,19 @@ const getAllRatePaginated = async (page, pageSize = 5) => {
         limit,
         attributes: ['id', 'title', 'urlsImages', 'raiting', 'options']
     })
+    return data
+}
 
+const getAllLatestPaginated = async (page, pageSize = 5) => {
+    const offset = page * pageSize;
+    const limit = pageSize;
 
+    const data = await Articles.findAndCountAll({
+        order: [['updatedAt', 'DESC']],
+        offset,
+        limit,
+        attributes: ['id', 'title', 'urlsImages', 'raiting', 'options']
+    })
     return data
 }
 
@@ -92,6 +103,7 @@ module.exports = {
     getAllArticles,
     getAllByRaiting,
     getAllRatePaginated,
+    getAllLatestPaginated,
     getArticleById,
     createArticle,
     updateArticle,
