@@ -12,6 +12,11 @@ const getAllByRaiting = async () => {
     return data
 }
 
+const getCount = async () => {
+    const data = await Articles.count()
+    return data
+}
+
 const getAllRatePaginated = async (page, pageSize = 5) => {
     const offset = page * pageSize;
     const limit = pageSize;
@@ -102,6 +107,7 @@ const updateRaiting = async (id) => {
 module.exports = {
     getAllArticles,
     getAllByRaiting,
+    getCount,
     getAllRatePaginated,
     getAllLatestPaginated,
     getArticleById,

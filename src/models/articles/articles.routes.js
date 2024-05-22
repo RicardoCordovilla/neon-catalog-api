@@ -9,6 +9,13 @@ let cache = apicache.middleware;
 router.get('/raiting',
     // cache('7 days'), 
     articlesServices.getAllByRaiting)
+
+// route to get total count of articles
+
+router.get('/count',
+    // cache('7 days'),
+    articlesServices.getCount)
+
 router.get('/rate/paginated',
     // cache('7 days'),
     articlesServices.getAllRatePaginated)

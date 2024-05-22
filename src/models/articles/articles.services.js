@@ -20,6 +20,16 @@ const getAllByRaiting = (req, res) => {
         })
 }
 
+const getCount = (req, res) => {
+    articlesControllers.getCount()
+        .then((response) => {
+            res.status(200).json(response)
+        })
+        .catch((err) => {
+            res.status(404).json({ message: err.message })
+        })
+}
+
 const getAllRatePaginated = (req, res) => {
     const { page, pageSize } = req.query
     articlesControllers.getAllRatePaginated(page, pageSize)
@@ -158,6 +168,7 @@ const updateRaiting = (req, res) => {
 module.exports = {
     getAllArticles,
     getAllByRaiting,
+    getCount,
     getAllRatePaginated,
     getAllLatestPaginated,
     getArticleById,
