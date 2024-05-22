@@ -12,6 +12,11 @@ router.get('/raiting',
 router.get('/rate/paginated',
     // cache('7 days'),
     articlesServices.getAllRatePaginated)
+
+router.get('/latest/paginated',
+    // cache('7 days'),
+    articlesServices.getAllLatestPaginated)
+    
 router.get('/search',
     // cache('7 days'),
     articlesServices.searchArticles)
