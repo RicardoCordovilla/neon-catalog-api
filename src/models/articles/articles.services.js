@@ -163,6 +163,18 @@ const updateRaiting = (req, res) => {
         })
 }
 
+const deleteArticle = (req, res) => {
+    const id = req.params.id
+    articlesControllers.deleteArticle(id)
+        .then(data => {
+            res.status(200).json(data)
+        })
+        .catch((err) => {
+            res.status(404).json({ message: err.message })
+        })
+}
+
+
 
 
 module.exports = {
@@ -175,5 +187,6 @@ module.exports = {
     createArticle,
     updateArticle,
     updateRaiting,
-    searchArticles
+    searchArticles,
+    deleteArticle
 }

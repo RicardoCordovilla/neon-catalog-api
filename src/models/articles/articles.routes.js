@@ -48,6 +48,11 @@ router.patch('/raiting/:id',
     articlesServices.updateRaiting
 )
 
+router.delete('/b0rr4c10n/:id',
+    // passport.authenticate('jwt', { session: false }),    
+    articlesServices.deleteArticle
+)
+
 
 module.exports = router
 

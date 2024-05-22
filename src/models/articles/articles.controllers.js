@@ -22,6 +22,7 @@ const getAllRatePaginated = async (page, pageSize = 5) => {
     const limit = pageSize;
 
     const data = await Articles.findAndCountAll({
+        where: { active: true },
         order: [['raiting', 'DESC']],
         offset,
         limit,
@@ -54,7 +55,8 @@ const searchArticles = async (search, page, pageSize) => {
                 { description: { [Op.iLike]: `%${search}%` } },
                 // { tags: { [Op.overlap]: ['decora'] } }
                 // { options: { [Op.contains]: { keywords: 'price' } } }
-            ]
+            ],
+            active: true
         },
         offset,
         limit,
@@ -102,6 +104,13 @@ const updateRaiting = async (id) => {
     return result
 }
 
+const deleteArticle = async (id) => {
+    const result = await Articles.destroy({
+        where: { id },truncate: true
+    })
+    return result
+}
+
 
 
 module.exports = {
@@ -114,6 +123,7 @@ module.exports = {
     createArticle,
     updateArticle,
     updateRaiting,
-    searchArticles
+    searchArticles,
+    deleteArticle
 }
 
