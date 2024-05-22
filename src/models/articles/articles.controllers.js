@@ -33,7 +33,7 @@ const getAllLatestPaginated = async (page, pageSize = 5) => {
         order: [['updatedAt', 'DESC']],
         offset,
         limit,
-        attributes: ['id', 'title', 'urlsImages', 'raiting', 'options']
+        // attributes: ['id', 'title', 'urlsImages', 'raiting', 'options']
     })
     return data
 }
